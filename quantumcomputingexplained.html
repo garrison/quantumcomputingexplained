@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=1024, user-scalable=no">
+
+  <title>Quantum Computing, Explained</title>
+
+  <!-- Required stylesheet -->
+  <link rel="stylesheet" href="deck.js/core/deck.core.css">
+
+  <!-- Extension CSS files go here. Remove or add as needed. -->
+  <link rel="stylesheet" href="deck.js/extensions/goto/deck.goto.css">
+  <link rel="stylesheet" href="deck.js/extensions/menu/deck.menu.css">
+  <link rel="stylesheet" href="deck.js/extensions/navigation/deck.navigation.css">
+  <link rel="stylesheet" href="deck.js/extensions/status/deck.status.css">
+  <link rel="stylesheet" href="deck.js/extensions/hash/deck.hash.css">
+  <link rel="stylesheet" href="deck.js/extensions/scale/deck.scale.css">
+  <link rel="stylesheet" href="deck.blank.js/deck.blank.css">
+
+  <!-- Style theme. More available in /themes/style/ or create your own. -->
+  <link rel="stylesheet" href="deck.js/themes/style/web-2.0.css">
+
+  <link rel="stylesheet" href="jsqis/jsqis-view.css">
+
+  <style>
+    .deck-container {
+        font-size: 2em;
+    }
+
+    ul li.slide ul { margin-bottom: 0 }
+
+    /* disable reflection shadows in web-2.0.css */
+    .cssreflections .deck-container .slide h2 {
+        -webkit-box-reflect: none;
+        -moz-box-reflect: none;
+    }
+
+    /* keep some elements fully visible as a slide progresses */
+    .deck-container > .slide .remain-fully-visible {
+        opacity: 1;
+    }
+
+    /* speaking-mode */
+    .speaking-mode .not-speaking {
+        display: none;
+    }
+    .speaking-mode .slide a, .speaking-mode .slide a:hover, .speaking-mode .slide a:focus, .speaking-mode .slide a:active, .speaking-mode .slide a:visited {
+        color: inherit;
+    }
+
+    /* not-speaking-mode */
+    .not-speaking-mode .speaking {
+        display: none;
+    }
+  </style>
+
+  <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+  <!-- <link rel="stylesheet" href="deck.js/themes/transition/horizontal-slide.css"> -->
+
+  <!-- fixme: need favicon -->
+
+  <!-- Required Modernizr file -->
+  <script src="deck.js/modernizr.custom.js"></script>
+</head>
+<body class="deck-container speaking-mode">
+
+<section class="slide" style="text-align: center">
+  <h2>Quantum Computing, Explained</h2>
+  <div style="margin-top: 5em">
+    <h3 style="font-size: 180%">Jim Garrison</h3>
+    <h3 style="font-size: 120%">Coloft (Santa Monica)</h3>
+    <h3 style="font-size: 100%">September 29, 2012</h3>
+  </div>
+</section>
+
+<section class="slide">
+  <!-- image would be better -->
+  <h1><strong>Thank you</strong> for braving carmageddon!</h1>
+</section>
+
+<section class="slide">
+  <h2>Quantum computing is something to be excited about.</h2>
+  <!-- There's three specific things I want to convince you of -->
+  <ul>
+    <li class="slide">a quantum computer operates directly using the unintuitive laws of quantum physics</li>
+    <li class="slide">quantum computing is a more powerful model of computation than classical computing*</li>
+    <!-- mention what i mean by classical computer/computing -->
+    <li class="slide">if we could build a moderately-sized quantum computer, it would radically change technology: Shor's algorithm, quantum simulations</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>Unique features of quantum physics</h2>
+  <ul>
+    <!-- we think of quantum mechanics as describing the microscopic world, but it really describes any system that is not coupled to the outside world -->
+    <li class="slide">a quantum system can be in a &ldquo;superposition&rdquo; of two or more of its allowed states
+      <div class="jsqis-machine jsqis-gate slide remain-fully-visible" data-qubits="1" id="superposition-demo" data-operations="[[gate.X, 0]]"></div>
+      <div class="slide jsqis-gate" data-machine="#superposition-demo" data-operations="[[gate.X, 0]]"></div>
+      <div class="slide jsqis-gate" data-machine="#superposition-demo" data-operations="[[gate.H, 0]]"></div>
+    </li>
+    <li class="slide">in general, we can only predict probabilities of what might happen
+      <ul><li class="slide">this is *NOT* a failure in our description -- it is an inherent aspect of quantum physics</li></ul></li>
+    <!-- mention here that einstein thought QM was incomplete, but bell and aspect showed it to be correct -->
+    <li class="slide">detection/measurement irreversibly changes the state of a system</li>
+    </ul>
+  <section class="slide">Although it may not seem believable, this is how the world really works!</section>
+</section>
+
+<section class="slide">
+  <h2>Classical and quantum computation</h2>
+  <ul>
+    <li>possible states</li>
+    <li>measurement</li>
+    <li>operations</li>
+  </ul>
+  <!-- i'm not going to dwell on physical realizations because in the 1940s i would have talked about vacuum tubes! (see two quotes on NC p 277). Instead I will focus on the universal concepts of quantum computing. -->
+</section>
+
+<!-- glossary: state, superposition, qubit, classical computer, operations (never say "gate"), phase -->
+
+<section class="slide">
+  <h1>Classical computing <br> <span style="font-size: 50%">(in a nutshell)</span></h1>
+</section>
+
+<section class="slide">
+  <h2>One classical bit</h2>
+  <!-- a bit is the basic unit of information in a computer.  it is either on (1) or off (0).  everything else is built from this. -->
+  <div class="jsqis-machine" data-qubits="1" id="one-bit-machine"></div>
+  <div class="slide jsqis-gate" data-machine="#one-bit-machine" data-operations="[[gate.X, 0]]"></div>
+</section>
+
+<section class="slide">
+  <h2>Many classical bits</h2>
+  <ul>
+    <li>A four bit machine can be in one of 16 different states.
+      <div class="jsqis-machine" data-qubits="4" id="many-bit-machine"></div>
+      <div class="slide jsqis-gate" data-machine="#many-bit-machine" data-operations="[[gate.X, 0]]"></div>
+      <div class="slide jsqis-gate" data-machine="#many-bit-machine" data-operations="[[gate.X, 3]]"></div>
+      <div class="slide jsqis-gate" data-machine="#many-bit-machine" data-operations="[[gate.X, 2]]"></div>
+    </li>
+    <li class="slide" style="margin-top: 2em;">A 300 bit machine can be in one of <span style="word-wrap: break-word; font-size: 75%; color: #660">2,037,035,976,334,486,086,268,445,688,409,378,161,051,468,393,665,936,250,636,140,449,354,381,299,763,336,706,183,397,376</span> possible states. <br> (more than the number of atoms in the observable universe!)
+  </ul>
+  <!-- As such, you might think this notation makes little sense, and it does.  We'll get back to that. -->
+</section>
+
+<section class="slide">
+  <h2>Classical operations</h2>
+  <ul>
+    <li class="slide">With one bit, the only nontrivial operation is &ldquo;NOT&rdquo; <br>(0 &rarr; 1, 1 &rarr; 0)
+    <li class="slide">A computer works by controlling bits with other bits; <br> e.g. &ldquo;CCNOT&rdquo; <br> (if bits A and B are both 1, perform a NOT operation bit C)</li>
+  </ul>
+  <section class="slide">From here we could build up all of classical computing.  We just need more bits.</section>
+</section>
+
+<!-- review binary numbers, at least as needed -->
+
+<!-- show a simple addition here -->
+
+<section class="slide">
+  <h1>Onward, to quantum computing!</h1>
+</section>
+
+<section class="slide" id="one-qubit">
+  <h2>One quantum bit (&ldquo;qubit&rdquo;)</h2>
+  <div class="jsqis-machine" data-qubits="1" id="one-qubit-machine"></div>
+  <div class="slide jsqis-gate" data-machine="#one-qubit-machine" data-operations="[[gate.H, 0]]"></div>
+  <div class="slide jsqis-gate" data-machine="#one-qubit-machine" data-operations="[[gate.T, 0]]"></div>
+  <div class="slide jsqis-gate" data-machine="#one-qubit-machine" data-operations="[[gate.T, 0]]"></div>
+  <div class="slide jsqis-gate" data-machine="#one-qubit-machine" data-operations="[[gate.T, 0]]"></div>
+  <div class="slide jsqis-gate" data-machine="#one-qubit-machine" data-operations="[[gate.T, 0]]"></div>
+  <!-- fuzzy bit is wrong! (incomplete)  -->
+</section>
+
+<!-- demonstrate redundancy in overall phase and normalization -->
+
+<section class="slide">
+  <h1>But there's a catch!</h1>
+  <!-- (quantum measurement) -->
+</section>
+
+<section class="slide">
+  <h2>Measurement (one qubit)</h2>
+  <div class="slide jsqis-machine jsqis-gate remain-fully-visible" data-qubits="1" id="one-qubit-measurement" data-operations="[[gate.randomizer, 8]]"></div>
+  <div class="slide jsqis-gate" data-machine="one-qubit-measurement" data-operations="[[gate.measurement, 253, 0]]"></div>
+</section>
+
+<section class="slide">
+  <h2>Measurement (one qubit)</h2>
+  <div class="slide jsqis-machine jsqis-gate remain-fully-visible" data-qubits="1" id="one-qubit-measurement" data-operations="[[gate.randomizer, 8]]"></div>
+  <div class="slide jsqis-gate" data-machine="one-qubit-measurement" data-operations="[[gate.measurement, 2453, 0]]"></div>
+  <section class="slide" style="margin-top: 2em">Given one quantum bit, only one classical bit of information can be extracted.</section>
+</section>
+
+<section class="slide">
+  <!-- the goal of this slide is to demonstrate the possible states for 3 (or even four) qubits -->
+  <h2>Many quantum bits</h2>
+  <div class="jsqis-machine" data-qubits="3" id="many-qubit-machine"></div>
+  <div class="slide jsqis-gate" data-machine="#many-qubit-machine" data-operations="[[gate.H, 0]]"></div>
+  <div class="slide jsqis-gate" data-machine="#many-qubit-machine" data-operations="[[gate.H, 2]]"></div>
+  <div class="slide jsqis-gate" data-machine="#many-qubit-machine" data-operations="[[gate.H, 1]]"></div>
+  <div class="slide jsqis-gate" data-machine="#many-qubit-machine" data-operations="[[gate.H, 2]]"></div>
+  <div class="slide jsqis-gate" data-machine="#many-qubit-machine" data-operations="[[gate.H, 0]]"></div>
+  <div class="slide jsqis-gate" data-machine="#many-qubit-machine" data-operations="[[gate.CNOT, 1, 0]]"></div>
+  <div class="slide jsqis-gate" data-machine="#many-qubit-machine" data-operations="[[gate.randomizer, 3]]"></div>
+</section>
+
+<!-- again, demonstrate redundancy in overall phase and normalization -->
+
+<!-- it's not just that each qubit is somewhere between zero and one -- the entire system is in a superposition of all possible states! -->
+
+<section class="slide">
+  <h2>Six quantum bits</h2>
+  <div class="slide jsqis-machine jsqis-gate remain-fully-visible" data-qubits="6" data-operations="[[gate.randomizer, 6]]" id="six-qubit-machine"></div>
+  <div class="slide jsqis-gate" data-machine="#six-qubit-machine" data-operations="[[gate.randomizer, 56]]"></div>
+</section>
+
+<section class="slide">
+  <h2>300 quantum bits</h2>
+  <ul>
+    <li class="slide">a 300 qubit machine can be in a superposition of all <span style="word-wrap: break-word; font-size: 75%; color: #660">2,037,035,976,334,486,086,268,445,688,409,378,161,051,468,393,665,936,250,636,140,449,354,381,299,763,336,706,183,397,376</span> possible states.</li>
+    <li class="slide">as such, there's no possible way to simulate a 300-qubit machine in the universe.</li>
+  <!-- mention around here that conceptually you can think of each qubit as a spin (or something) -->
+</section>
+
+<section class="slide">
+  <h2>Measurement (many qubits)</h2>
+  <div class="slide jsqis-machine jsqis-gate remain-fully-visible" data-qubits="5" id="many-qubit-measurement" data-operations="[[gate.randomizer, 8]]"></div>
+  <div class="slide jsqis-gate" data-machine="#many-qubit-measurement" data-operations="[[gate.measurement, 2453, 0, 1, 2, 3, 4]]"></div>
+</section>
+
+<section class="slide">
+  <h2>Measurement (many qubits)</h2>
+  <div class="slide jsqis-machine jsqis-gate remain-fully-visible" data-qubits="5" id="many-qubit-measurement" data-operations="[[gate.randomizer, 8]]"></div>
+  <div class="slide jsqis-gate" data-machine="#many-qubit-measurement" data-operations="[[gate.measurement, 2452, 0, 1, 2, 3, 4]]"></div>
+</section>
+
+<section class="slide">
+  <h2>Partial measurement</h2>
+  <div class="slide jsqis-machine jsqis-gate remain-fully-visible" data-qubits="5" id="partial-measurement" data-operations="[[gate.randomizer, 8]]"></div>
+  <div class="slide jsqis-gate" data-machine="#partial-measurement" data-operations="[[gate.measurement, 2455, 0]]"></div>
+  <div class="slide jsqis-gate" data-machine="#partial-measurement" data-operations="[[gate.measurement, 2455, 1]]"></div>
+  <div class="slide jsqis-gate" data-machine="#partial-measurement" data-operations="[[gate.measurement, 2457, 2]]"></div>
+  <div class="slide jsqis-gate" data-machine="#partial-measurement" data-operations="[[gate.measurement, 2458, 3]]"></div>
+  <div class="slide jsqis-gate" data-machine="#partial-measurement" data-operations="[[gate.measurement, 242, 4]]"></div>
+</section>
+
+<section class="slide">
+  <h2>Quantum measurement: summarized</h2>
+  <ul>
+    <li class="slide">measurement of 300 qubits &rarr;  300 classical bits of classical information</li>
+    <li class="slide">but yet, it takes incredible computing power to simulate this on a classical computer</li>
+    <li class="slide">the design of quantum algorithms involves coming up with tricks for doing useful computations despite this seeming limitation</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>Quantum entanglement</h2>
+  <div class="slide jsqis-machine jsqis-gate remain-fully-visible" data-qubits="2" id="entanglement-machine" data-operations="[[gate.H, 0], [gate.CNOT, 0, 1]]"></div>
+  <div class="slide jsqis-gate" data-machine="#entanglement-machine" data-operations="[[gate.measurement, 23, 0]]"></div>
+</section>
+
+<!-- NOW go to bloch sphere to explain allowed operations on a single qubit (see in N&C p174 for bloch sphere rotation) -->
+<!-- since rotation about any given axis is a allowed operation, choice of which ends 0 and 1 are are arbitrary -->
+
+<section class="slide">
+  <h1>Quantum operations</h1>
+</section>
+
+<section class="slide">
+  <h2>Single qubit operations</h2>
+  <img src="Bloch.png">
+</section>
+
+<section class="slide">
+  <h2>NOT</h2>
+  <div class="slide jsqis-machine remain-fully-visible" data-qubits="1" id="one-qubit-X2"></div>
+  <div class="slide jsqis-gate" data-machine="#one-qubit-X2" data-operations="[[gate.X, 0]]"></div>
+</section>
+
+<section class="slide jsqis-gate" data-machine="#one-qubit-X" data-operations="[[gate.X, 0], [gate.T, 0], [gate.X, 0], [gate.H, 0], [gate.Z, 0], [gate.T, 0]]">
+  <h2>NOT</h2>
+  <div class="slide jsqis-machine remain-fully-visible" data-qubits="1" id="one-qubit-X"></div>
+  <div class="slide jsqis-gate" data-machine="#one-qubit-X" data-operations="[[gate.X, 0]]"></div>
+</section>
+
+<section class="slide jsqis-gate" data-machine="#one-qubit-Z" data-operations="[[gate.randomizer, 34]]">
+  <h2>Phase</h2>
+  <div class="slide jsqis-machine remain-fully-visible" data-qubits="1" id="one-qubit-Z"></div>
+  <div class="slide jsqis-gate" data-mahine="#one-qubit-Z" data-operations="[[gate.Z, 0]]"></div>
+</section>
+
+<!--
+X gate
+T gate
+Z gate
+H gate
+-->
+
+<!-- show in particular how H allows us to take an equal superposition (of one qubit) and bring it to something you can predict with 100% accuracy -->
+
+<!-- remember: a classical bit you can only do two things to: keep it the same or flip it (i.e. the X gate).  here, we have infinite choices.  on just one qubit! -->
+
+<section class="slide jsqis-gate" data-machine="#many-qubit-X" data-operations="[[gate.randomizer, 34]]">
+  <h2>NOT: many qubits</h2>
+  <div class="slide jsqis-machine remain-fully-visible" data-qubits="4" id="many-qubit-X"></div>
+  <div class="slide jsqis-gate" data-machine="#many-qubit-X" data-operations="[[gate.X, 0]]"></div>
+</section>
+
+<section class="slide jsqis-gate" data-machine="#many-qubit-Z" data-operations="[[gate.randomizer, 34]]">
+  <h2>Phase: many qubits</h2>
+  <div class="slide jsqis-machine remain-fully-visible" data-qubits="4" id="many-qubit-Z"></div>
+  <div class="slide jsqis-gate" data-mahine="#many-qubit-Z" data-operations="[[gate.Z, 0]]"></div>
+</section>
+
+<section class="slide jsqis-gate" data-machine="#many-qubit-CNOT" data-operations="[[gate.randomizer, 34]]"">
+  <h2>Controlled-NOT</h2>
+  <div class="slide jsqis-machine remain-fully-visible" data-qubits="4" id="many-qubit-CNOT"></div>
+  <div class="slide jsqis-gate" data-mahine="#many-qubit-CNOT" data-operations="[[gate.CNOT, 0, 1]]"></div>
+</section>
+
+<!--
+<section class="slide">
+universal quantum computer from certain gates (show a complete set, c.f. toffoli + CNOT)
+</section>
+-->
+
+<section class="slide">
+  <h2>Quantum computing must be reversible</h2>
+  <ul>
+    <li class="slide">the only irreversible step is &ldquo;measurement&rdquo;</li>
+    <li class="slide">quantum no clone theorem</li>
+  </ul>
+  <section class="slide">Presumably we are working on information at the fundamental level the universe uses to operate.</section>
+  <!-- notice: reversible computation.  no information can be copied or lost.  why?  can't be copied because of no clone.  the only way to "lose" quantum information is to measure it, which really just means the information has escaped beyond the physical system we are considering and into the environment -->
+</section>
+
+<section class="slide">
+  <h2>How to build a quantum computer</h2>
+  <ul>
+    <li class="slide">no clone &rarr; information can be lost to anything it interacts with</li>
+    <li class="slide">low temperatures typically, or a degree of freedom that doesn't interact easily</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>DiVincenzo Criteria</h2>
+  <ul>
+    <li class="slide">well-defined qubits</li>
+    <li class="slide">reliable state preparation</li>
+    <li class="slide">low decoherence</li>
+    <li class="slide">accurate operations</li>
+    <li class="slide">strong measurements</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>Possible hardware implementations</h2>
+  <ul>
+    <li>ion traps</li>
+    <li>superconducting qubits</li>
+    <li>spin-defects in diamond and other materials</li>
+    <li>quantum dots</li>
+    <li>toplogical quantum computing</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>State of the art: <br> factoring 21 = 3 * 7</h2>
+  <!-- http://www.nature.com/nphys/journal/vaop/ncurrent/full/nphys2385.html -->
+  <!-- if an algorithm fails, we have to run the whole computation again from scratch! -->
+</section>
+
+<section class="slide">
+  <h2>Other concepts</h2>
+  <ul>
+    <li class="slide">quantum teleportation</li>
+    <li class="slide">quantum cryptography</li>
+    <!-- and relate it to no-clone
+    so there is a defense if RSA is broken! -->
+    <li class="slide">quantum error correction</li>
+</section>
+
+<section class="slide">
+  <!-- copy-pasted from introduction -->
+  <h2>Quantum computing is something to be excited about.</h2>
+  <ul>
+    <li>a quantum computer operates directly using the unintuitive laws of quantum physics</li>
+    <li>quantum computing is a more powerful model of computation than classical computing*</li>
+    <li>if we could build a moderately-sized quantum computer, it would radically change technology: Shor's algorithm, quantum simulations</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>Further reading</h2>
+  <!-- http://www.nytimes.com/2011/12/06/science/scott-aaronson-quantum-computing-promises-new-insights.html?pagewanted=all -->
+  <!-- michael nielsen's blog (?) -->
+  <ul>
+    <li><h4><a href="http://www.theory.caltech.edu/people/preskill/ph229/#lecture">John Preskill's quantum computation lecture notes</a></h4> available for free (gratis) online</li>
+    <li><h4>An Introduction to Quantum Computing</h4> <span class="not-speaking">(<a href="http://www.amazon.com/gp/product/019857049X/ref=as_li_tf_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=019857049X&linkCode=as2&tag=quantumcomputingexplained-20">Amazon</a> | <a href="http://www.worldcat.org/title/introduction-to-quantum-computing/oclc/85896383">WorldCat</a>)</span> by Phillip Kaye, Raymond Laflamme, and Michele Mosca</li>
+    <li><h4>Quantum Computation and Quantum Information</h4> <span class="not-speaking">(<a href="http://www.amazon.com/gp/product/1107002176/ref=as_li_tf_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1107002176&linkCode=as2&tag=quantumcomputingexplained-20">Amazon</a> | <a href="http://www.worldcat.org/title/quantum-computation-and-quantum-information/oclc/43641333">WorldCat</a>)</span> by Michael A. Nielsen and Isaac L. Chuang (a thick, comprehensive book)</li>
+  </ul>
+  <div>Note: the language of quantum mechanics is linear algebra (matrices) over the complex numbers</div>
+  <ul>
+    <li><h4>Quantum Mechanics in Simple Matrix Form</h4> <span class="not-speaking">(<a href="http://www.amazon.com/gp/product/0486445305/ref=as_li_tf_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0486445305&linkCode=as2&tag=quantumcomputingexplained-20">Amazon</a> | <a href="http://www.worldcat.org/title/quantum-mechanics-in-simple-matrix-form/oclc/12162801">WorldCat</a>)</span> by Thomas F. Jordan (covers basic quantum mechanics, but no quantum computing)</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <section>
+    <h2>Credits</h2>
+    <ul>
+      <li><a href="https://github.com/garrison/jsqis">jsqis</a> for quantum simulations</li>
+      <li><a href="http://raphaeljs.com/">Raphaël</a> for 2D vector graphics</li>
+      <li><a href="http://imakewebthings.com/deck.js/">deck.js</a> and <a href="https://github.com/mikeharris100/deck.events.js">deck.events.js</a> for presentation-building</li>
+      <li><a href="http://jquery.com/">jQuery</a> and <a href="http://modernizr.com/">Modernizr</a> as a foundation</li>
+      <li>mooz's <a href="https://github.com/mikeharris100/deck.events.js">fork of js2-mode</a> for keeping me sane</li>
+    </ul>
+  </section>
+  <section class="slide">
+    <h3>Thanks</h3>
+    <ul>
+      <li>Misha (my girlfriend) for knowing all the surface streets in Los Angeles today</li>
+      <li><a href="http://www.andrewvc.com/">Andrew Cholakian</a> for suggesting that I present this as part of <a href="http://www.meetup.com/Los-Angeles-Hacker-News/">LA Hacker News</a></li>
+      <li><a href="http://www.kitp.ucsb.edu/mpaf">Matthew Fisher</a>, my academic advisor, for telling me to &ldquo;have fun with it.&rdquo;</li>
+      <li>the <a href="http://www.nsf.gov/">National Science Foundation</a> for funding my research</li>
+    </ul>
+  </section>
+</section>
+
+<!--
+<section class="slide">
+  <h2>About</h2>
+  <section><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/us/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Quantum Computing, Explained</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://quantumcomputingexplained.net/" property="cc:attributionName" rel="cc:attributionURL">garrison</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 United States License</a>.</section>
+  <section>contact</section>
+  <section><a href="https://github.com/garrison/quantumcomputingexplained">github</a></section>
+</section>
+-->
+
+<!-- Begin extension snippets. Add or remove as needed. -->
+
+<!-- deck.navigation snippet -->
+<a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+<a href="#" class="deck-next-link" title="Next">&#8594;</a>
+
+<!-- deck.status snippet -->
+<!--
+<p class="deck-status">
+  <span class="deck-status-current"></span>
+  /
+  <span class="deck-status-total"></span>
+</p>
+-->
+
+<!-- deck.goto snippet -->
+<form action="." method="get" class="goto-form">
+  <label for="goto-slide">Go to slide:</label>
+  <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+  <datalist id="goto-datalist"></datalist>
+  <input type="submit" value="Go">
+</form>
+
+<!-- deck.hash snippet -->
+<a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+
+<!-- End extension snippets. -->
+
+
+<!-- Required JS files. -->
+<script src="deck.js/jquery-1.7.2.min.js"></script>
+<script src="deck.js/core/deck.core.js"></script>
+
+<!-- Extension JS files. Add or remove as needed. -->
+<script src="deck.js/core/deck.core.js"></script>
+<script src="deck.js/extensions/hash/deck.hash.js"></script>
+<script src="deck.js/extensions/menu/deck.menu.js"></script>
+<script src="deck.js/extensions/goto/deck.goto.js"></script>
+<script src="deck.js/extensions/status/deck.status.js"></script>
+<script src="deck.js/extensions/navigation/deck.navigation.js"></script>
+<script src="deck.js/extensions/scale/deck.scale.js"></script>
+<script src="deck.blank.js/deck.blank.js"></script>
+<script src="deck.events.js/deck.events.js"></script>
+
+<!-- load jsqis -->
+<script src="jsqis/raphael/raphael-min.js"></script>
+<script src="jsqis/Complex/lib/Complex.js"></script>
+<script src="jsqis/jsqis-core.js"></script>
+<script src="jsqis/jsqis-view.js"></script>
+<script src="jsqis/deck.jsqis.js"></script>
+
+<!-- Initialize the deck -->
+<script>
+$(function() {
+    $.deck('.slide');
+});
+</script>
+
+</body>
+</html>

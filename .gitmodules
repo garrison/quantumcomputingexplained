@@ -1,0 +1,12 @@
+[submodule "deck.js"]
+	path = deck.js
+	url = https://github.com/imakewebthings/deck.js.git
+[submodule "deck.events.js"]
+	path = deck.events.js
+	url = https://github.com/mikeharris100/deck.events.js.git
+[submodule "deck.blank.js"]
+	path = deck.blank.js
+	url = https://github.com/knittl/deck.blank.js.git
+[submodule "jsqis"]
+	path = jsqis
+	url = https://github.com/garrison/jsqis.git
