@@ -30,6 +30,11 @@
 
     ul li.slide ul { margin-bottom: 0 }
 
+    span.QuantumCircuitView {
+        padding-left: 1em;
+        padding-right: 2em;
+    }
+
     /* disable reflection shadows in web-2.0.css */
     .cssreflections .deck-container .slide h2 {
         -webkit-box-reflect: none;
@@ -63,14 +68,14 @@
   <!-- Required Modernizr file -->
   <script src="deck.js/modernizr.custom.js"></script>
 </head>
-<body class="deck-container not-speaking-mode">
+<body class="deck-container speaking-mode">
 
 <section class="slide" style="text-align: center">
   <h2>Quantum Computing, Explained</h2>
   <div style="margin-top: 5em">
     <h3 style="font-size: 180%">Jim Garrison</h3>
-    <h3 style="font-size: 120%">Coloft (Santa Monica)</h3>
-    <h3 style="font-size: 100%">September 29, 2012</h3>
+    <h3 style="font-size: 120%">SATELLITE Santa Monica</h3>
+    <h3 style="font-size: 100%">January 13, 2013</h3>
   </div>
   <p class="not-speaking">NOTE: Everything in this presentation is mathematically precise (but we will use colorful diagrams in place of equations).</p>
   <p class="not-speaking">To begin, push the right arrow button on your keyboard.</p>
@@ -94,9 +99,9 @@
     <li class="slide">a quantum system can be in a &ldquo;superposition&rdquo; of two or more of its allowed states
       <div class="jsqis-machine slide remain-fully-visible" data-qubits="1" id="superposition-demo"></div>
       <div class="invisible-if-speaking">
-	<span class="slide">A classical bit can be hold a value of 0</span>
-	<span class="slide jsqis-gate invisible-if-speaking" data-machine="#superposition-demo" data-operations="[[gate.X, 0]]"> or 1.</span>
-	<span class="slide jsqis-gate invisible-if-speaking" data-machine="#superposition-demo" data-operations="[[gate.X, 0], [gate.H, 0]]">A quantum bit can be anywhere in between.  (We will elaborate in more detail later.)</span>
+	<span class="slide invisible-if-speaking">A classical bit can be hold a value of 0</span>
+	<span class="slide jsqis-gate" data-machine="#superposition-demo" data-operations="[[gate.X, 0]]"> or 1.</span>
+	<span class="slide jsqis-gate" data-machine="#superposition-demo" data-operations="[[gate.X, 0], [gate.H, 0]]">A quantum bit can be anywhere in between.  (We will elaborate in more detail later.)</span>
       </div>
     </li>
     <li class="slide">in general, we can only predict probabilities of what might happen
@@ -127,7 +132,7 @@
 <section class="slide">
   <h2>One classical bit</h2>
   <!-- a bit is the basic unit of information in a computer.  it is either on (1) or off (0).  everything else is built from this. -->
-  <div class="jsqis-machine" data-qubits="1" id="one-bit-machine"></div>
+  <div class="jsqis-machine" data-qubits="1" id="one-bit-machine" data-view-options="{scale: 2}"></div>
   <div class="slide jsqis-gate" data-machine="#one-bit-machine" data-operations="[[gate.X, 0]]"></div>
 </section>
 
@@ -156,24 +161,42 @@
 
 <!-- review binary numbers, at least as needed -->
 
-<!-- show a simple addition here -->
+<section class="slide jsqis-gate" data-machine="#example-classical-algorithm" data-operations="[[gate.X, 0], [gate.X, 1]]">
+  <h2>Example classical algorithm</h2>
+  <div style="white-space: nowrap">
+    <span id="example-classical-algorithm-circuit"></span>
+    <span class="slide jsqis-machine remain-fully-visible" data-qubits="4" id="example-classical-algorithm" data-options="{rescaleStrategy: 'max'}" data-view-options="{scale: 2, amplitudesPerRow: 4}" data-circuit-view-container="#example-classical-algorithm-circuit" data-circuit-view-options="{scale: 1.5}"></span>
+    <div class="slide jsqis-gate" data-machine="#example-classical-algorithm" data-operations="[[gate.CCNOT, 0, 1, 3]]"></div>
+    <div class="slide jsqis-gate" data-machine="#example-classical-algorithm" data-operations="[[gate.CNOT, 0, 2]]"></div>
+    <div class="slide jsqis-gate" data-machine="#example-classical-algorithm" data-operations="[[gate.CNOT, 1, 2]]"></div>
+  </div>
+</section>
 
 <section class="slide">
-  <h1>Onward, to quantum computing!</h1>
+  <h1>Onward,<br> to quantum computing</h1>
 </section>
 
 <section class="slide" id="one-qubit">
   <h2>One quantum bit (&ldquo;qubit&rdquo;)</h2>
-  <div class="jsqis-machine" data-qubits="1" id="one-qubit-machine"></div>
-  <div class="slide jsqis-gate" data-machine="#one-qubit-machine" data-operations="[[gate.H, 0]]"></div>
-  <div class="slide jsqis-gate" data-machine="#one-qubit-machine" data-operations="[[gate.T, 0]]"></div>
+  <div class="jsqis-machine" data-qubits="1" id="one-qubit-machine" data-view-options="{scale: 2}"></div>
+  <div class="slide jsqis-gate" data-machine="#one-qubit-machine" data-operations="[[gate.H, 0]]"><!--Superposition--></div>
+  <div class="slide jsqis-gate remain-fully-visible" data-machine="#one-qubit-machine" data-operations="[[gate.T, 0]]"><!--Each arrow has both a size and a rotation.--></div>
   <div class="slide jsqis-gate" data-machine="#one-qubit-machine" data-operations="[[gate.T, 0]]"></div>
   <div class="slide jsqis-gate" data-machine="#one-qubit-machine" data-operations="[[gate.T, 0]]"></div>
   <div class="slide jsqis-gate" data-machine="#one-qubit-machine" data-operations="[[gate.T, 0]]"></div>
   <!-- fuzzy bit is wrong! (incomplete)  -->
+  <div class="slideeeeee"><!--Invariant under:--></div> <!-- phase and overall magnitude -->
+  <div class="slide jsqis-gate" data-machine="#one-qubit-machine" data-operations="[[gate.globalPhase, .35]]"></div>
+  <div class="slide jsqis-gate" data-machine="#one-qubit-machine" data-operations="[[gate.globalPhase, .35]]"></div>
+  <div class="slide jsqis-gate" data-machine="#one-qubit-machine" data-operations="[[gate.globalPhase, .35]]"></div>
+  <div class="slide jsqis-gate" data-machine="#one-qubit-machine" data-operations="[[gate.globalPhase, .35]]"></div>
+  <div class="slide jsqis-gate" data-machine="#one-qubit-machine" data-operations="[[gate.globalPhase, .35]]"></div>
+  <div class="slide jsqis-gate" data-machine="#one-qubit-machine" data-operations="[[gate.globalPhase, .35]]"></div>
+  <div class="slide jsqis-gate" data-machine="#one-qubit-machine" data-operations="[[gate.rescale, 1.5]]"></div>
+  <div class="slide jsqis-gate" data-machine="#one-qubit-machine" data-operations="[[gate.rescale, .5]]"></div>
+  <div class="slide jsqis-gate" data-machine="#one-qubit-machine" data-operations="[[gate.rescale, 1]]"></div>
+  <!-- so if we rotate just one, that's an operation.  but rotating all of them at once does nothing. -->
 </section>
-
-<!-- demonstrate redundancy in overall phase and normalization -->
 
 <section class="slide">
   <h1>But there's a catch!</h1>
@@ -182,14 +205,14 @@
 
 <section class="slide">
   <h2>Measurement (one qubit)</h2>
-  <div class="slide jsqis-machine jsqis-gate remain-fully-visible" data-qubits="1" id="one-qubit-measurement" data-options="{rescaleStrategy: false}" data-operations="[[gate.randomize, 8]]"></div>
+  <div class="slide jsqis-machine jsqis-gate remain-fully-visible" data-qubits="1" id="one-qubit-measurement" data-view-options="{scale: 2}" data-options="{rescaleStrategy: false}" data-operations="[[gate.randomize, 8]]"></div>
   <div class="slide jsqis-gate" data-machine="one-qubit-measurement" data-operations="[[gate.measure, 253, 0]]"></div>
   <div class="slide jsqis-gate" data-machine="one-qubit-measurement" data-operations="[[gate.rescale]]"></div>
 </section>
 
 <section class="slide">
   <h2>Measurement (one qubit)</h2>
-  <div class="slide jsqis-machine jsqis-gate remain-fully-visible" data-qubits="1" id="one-qubit-measurement" data-options="{rescaleStrategy: false}" data-operations="[[gate.randomize, 8]]"></div>
+  <div class="slide jsqis-machine jsqis-gate remain-fully-visible" data-qubits="1" id="one-qubit-measurement" data-view-options="{scale: 2}" data-options="{rescaleStrategy: false}" data-operations="[[gate.randomize, 8]]"></div>
   <div class="slide jsqis-gate" data-machine="one-qubit-measurement" data-operations="[[gate.measure, 2453, 0]]"></div>
   <div class="slide jsqis-gate" data-machine="one-qubit-measurement" data-operations="[[gate.rescale]]"></div>
   <section class="slide" style="margin-top: 2em">Given one quantum bit, only one classical bit of information can be extracted.</section>
@@ -198,7 +221,7 @@
 <section class="slide">
   <!-- the goal of this slide is to demonstrate the possible states for 3 (or even four) qubits -->
   <h2>Many quantum bits</h2>
-  <div class="jsqis-machine" data-qubits="3" id="many-qubit-machine"></div>
+  <div class="jsqis-machine" data-qubits="3" id="many-qubit-machine" data-view-options="{scale: 2, amplitudesPerRow: 4}"></div>
   <div class="slide jsqis-gate" data-machine="#many-qubit-machine" data-operations="[[gate.H, 0]]"></div>
   <div class="slide jsqis-gate" data-machine="#many-qubit-machine" data-operations="[[gate.H, 2]]"></div>
   <div class="slide jsqis-gate" data-machine="#many-qubit-machine" data-operations="[[gate.H, 1]]"></div>
@@ -206,6 +229,10 @@
   <div class="slide jsqis-gate" data-machine="#many-qubit-machine" data-operations="[[gate.H, 0]]"></div>
   <div class="slide jsqis-gate" data-machine="#many-qubit-machine" data-operations="[[gate.CNOT, 1, 0]]"></div>
   <div class="slide jsqis-gate" data-machine="#many-qubit-machine" data-operations="[[gate.randomize, 3]]"></div>
+  <div class="slide jsqis-gate" data-machine="#many-qubit-machine" data-operations="[[gate.rescale, 'max']]"></div>
+  <div class="slide jsqis-gate" data-machine="#many-qubit-machine" data-operations="[[gate.globalPhase, .55]]"></div>
+  <div class="slide jsqis-gate" data-machine="#many-qubit-machine" data-operations="[[gate.globalPhase, .55]]"></div>
+  <div class="slide jsqis-gate" data-machine="#many-qubit-machine" data-operations="[[gate.globalPhase, .55]]"></div>
 </section>
 
 <!-- again, demonstrate redundancy in overall phase and normalization -->
@@ -228,28 +255,36 @@
   <!-- mention around here that conceptually you can think of each qubit as a spin (or something) -->
 </section>
 
-<section class="slide">
+<section class="slide jsqis-gate" data-operations="[[gate.randomize, 8]]">
   <h2>Measurement (many qubits)</h2>
-  <div class="slide jsqis-machine jsqis-gate remain-fully-visible" data-qubits="5" id="many-qubit-measurement" data-options="{rescaleStrategy: false}" data-operations="[[gate.randomize, 8]]"></div>
-  <div class="slide jsqis-gate" data-machine="#many-qubit-measurement" data-operations="[[gate.measure, 2453, 0, 1, 2, 3, 4]]"></div>
-  <div class="slide jsqis-gate" data-machine="#many-qubit-measurement" data-operations="[[gate.rescale]]"></div>
+  <div style="white-space: nowrap">
+    <span class="slide remain-fully-visible" id="many-qubit-measurement-circuit"></span>
+    <span class="slide jsqis-machine remain-fully-visible" data-qubits="4" id="many-qubit-measurement" data-options="{rescaleStrategy: false}" data-view-options="{scale: 2, amplitudesPerRow: 4}" data-circuit-view-container="#many-qubit-measurement-circuit" data-circuit-view-options="{scale: 1}"></span>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-measurement" data-operations="[[gate.measure, 2453, 0, 1, 2, 3]]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-measurement" data-operations="[[gate.rescale]]"></div>
+  </div>
 </section>
 
-<section class="slide">
+<section class="slide jsqis-gate" data-operations="[[gate.randomize, 8]]">
   <h2>Measurement (many qubits)</h2>
-  <div class="slide jsqis-machine jsqis-gate remain-fully-visible" data-qubits="5" id="many-qubit-measurement" data-options="{rescaleStrategy: false}" data-operations="[[gate.randomize, 8]]"></div>
-  <div class="slide jsqis-gate" data-machine="#many-qubit-measurement" data-operations="[[gate.measure, 2452, 0, 1, 2, 3, 4]]"></div>
-  <div class="slide jsqis-gate" data-machine="#many-qubit-measurement" data-operations="[[gate.rescale]]"></div>
+  <div style="white-space: nowrap">
+    <span class="slide remain-fully-visible" id="many-qubit-measurement2-circuit"></span>
+    <span class="slide jsqis-machine remain-fully-visible" data-qubits="4" id="many-qubit-measurement2" data-options="{rescaleStrategy: false}" data-view-options="{scale: 2, amplitudesPerRow: 4}" data-circuit-view-container="#many-qubit-measurement2-circuit" data-circuit-view-options="{scale: 1}"></span>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-measurement2" data-operations="[[gate.measure, 2452, 0, 1, 2, 3]]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-measurement2" data-operations="[[gate.rescale]]"></div>
+  </div>
 </section>
 
-<section class="slide">
+<section class="slide jsqis-gate" data-operations="[[gate.randomize, 8]]">
   <h2>Partial measurement</h2>
-  <div class="slide jsqis-machine jsqis-gate remain-fully-visible" data-qubits="5" id="partial-measurement" data-options="{rescaleStrategy: false}" data-operations="[[gate.randomize, 8]]"></div>
-  <div class="slide jsqis-gate" data-machine="#partial-measurement" data-operations="[[gate.measure, 2455, 0], [gate.rescale, 'max']]"></div>
-  <div class="slide jsqis-gate" data-machine="#partial-measurement" data-operations="[[gate.measure, 2455, 1], [gate.rescale, 'max']]"></div>
-  <div class="slide jsqis-gate" data-machine="#partial-measurement" data-operations="[[gate.measure, 2457, 2], [gate.rescale, 'max']]"></div>
-  <div class="slide jsqis-gate" data-machine="#partial-measurement" data-operations="[[gate.measure, 2458, 3], [gate.rescale, 'max']]"></div>
-  <div class="slide jsqis-gate" data-machine="#partial-measurement" data-operations="[[gate.measure, 242, 4], [gate.rescale, 'max']]"></div>
+  <div style="white-space: nowrap">
+    <span class="slide remain-fully-visible" id="partial-measurement-circuit"></span>
+    <span class="slide jsqis-machine remain-fully-visible" data-qubits="4" id="partial-measurement" data-options="{rescaleStrategy: false}" data-view-options="{scale: 2, amplitudesPerRow: 4}" data-circuit-view-container="#partial-measurement-circuit"></span>
+    <div class="slide jsqis-gate" data-machine="#partial-measurement" data-operations="[[gate.measure, 2455, 0], [gate.rescale, 'max']]"></div>
+    <div class="slide jsqis-gate" data-machine="#partial-measurement" data-operations="[[gate.measure, 2455, 1], [gate.rescale, 'max']]"></div>
+    <div class="slide jsqis-gate" data-machine="#partial-measurement" data-operations="[[gate.measure, 2457, 2], [gate.rescale, 'max']]"></div>
+    <div class="slide jsqis-gate" data-machine="#partial-measurement" data-operations="[[gate.measure, 2465, 3], [gate.rescale, 'max']]"></div>
+  </div>
 </section>
 
 <section class="slide">
@@ -261,41 +296,48 @@
   </ul>
 </section>
 
+<!--
 <section class="slide">
   <h2>Quantum entanglement</h2>
-  <div class="slide jsqis-machine jsqis-gate remain-fully-visible" data-qubits="2" id="entanglement-machine" data-operations="[[gate.H, 0], [gate.CNOT, 0, 1]]"></div>
+  <div class="slide jsqis-machine jsqis-gate remain-fully-visible" data-qubits="2" id="entanglement-machine" data-operations="[[gate.H, 0], [gate.CNOT, 0, 1]]" data-view-options="{scale: 2}"></div>
   <div class="slide jsqis-gate" data-machine="#entanglement-machine" data-operations="[[gate.measure, 23, 0]]"></div>
+</section>
+-->
+
+<section class="slide">
+  <h1>Quantum operations</h1>
 </section>
 
 <!-- NOW go to bloch sphere to explain allowed operations on a single qubit (see in N&C p174 for bloch sphere rotation) -->
 <!-- since rotation about any given axis is a allowed operation, choice of which ends 0 and 1 are are arbitrary -->
 
 <section class="slide">
-  <h1>Quantum operations</h1>
-</section>
-
-<section class="slide">
   <h2>Single qubit operations</h2>
+<!--
   <img src="Bloch.png">
   <div style="font-size: 70%">&ldquo;Bloch Sphere&rdquo; by &ldquo;Smite-Meister.&rdquo;  Licensed CC-BY-SA <a href="http://en.wikipedia.org/wiki/File:Bloch_sphere.svg">from Wikipedia</a>.</div>
+-->
 </section>
 
 <section class="slide">
-  <h2>NOT</h2>
-  <div class="slide jsqis-machine remain-fully-visible" data-qubits="1" id="one-qubit-X2"></div>
+  <h2>&ldquo;NOT&rdquo; operation</h2>
+  <span class="slide remain-fully-visible" id="one-qubit-X2-circuit"></span>
+  <span class="slide jsqis-machine remain-fully-visible" data-qubits="1" id="one-qubit-X2" data-view-options="{scale: 2}" data-circuit-view-container="#one-qubit-X2-circuit" data-circuit-view-options="{scale: 2}"></span>
   <div class="slide jsqis-gate" data-machine="#one-qubit-X2" data-operations="[[gate.X, 0]]"></div>
 </section>
 
 <section class="slide jsqis-gate" data-machine="#one-qubit-X" data-operations="[[gate.X, 0], [gate.T, 0], [gate.X, 0], [gate.H, 0], [gate.Z, 0], [gate.T, 0]]">
-  <h2>NOT</h2>
-  <div class="slide jsqis-machine remain-fully-visible" data-qubits="1" id="one-qubit-X"></div>
+  <h2>&ldquo;NOT&rdquo; operation</h2>
+  <span class="slide remain-fully-visible" id="one-qubit-X-circuit"></span>
+  <span class="slide jsqis-machine remain-fully-visible" data-qubits="1" id="one-qubit-X" data-view-options="{scale: 2}" data-circuit-view-container="#one-qubit-X-circuit" data-circuit-view-options="{scale: 2}"></span>
   <div class="slide jsqis-gate" data-machine="#one-qubit-X" data-operations="[[gate.X, 0]]"></div>
 </section>
 
 <section class="slide jsqis-gate" data-machine="#one-qubit-Z" data-operations="[[gate.randomize, 34]]">
-  <h2>Phase</h2>
-  <div class="slide jsqis-machine remain-fully-visible" data-qubits="1" id="one-qubit-Z"></div>
-  <div class="slide jsqis-gate" data-mahine="#one-qubit-Z" data-operations="[[gate.Z, 0]]"></div>
+  <h2>&ldquo;Phase&rdquo; operation</h2>
+  <span class="slide remain-fully-visible" id="one-qubit-Z-circuit"></span>
+  <span class="slide jsqis-machine remain-fully-visible" data-qubits="1" id="one-qubit-Z" data-view-options="{scale: 2}" data-circuit-view-container="#one-qubit-Z-circuit" data-circuit-view-options="{scale: 2}"></span>
+  <div class="slide jsqis-gate" data-machine="#one-qubit-Z" data-operations="[[gate.Z, 0]]"></div>
 </section>
 
 <!--
@@ -309,29 +351,62 @@ H gate
 
 <!-- remember: a classical bit you can only do two things to: keep it the same or flip it (i.e. the X gate).  here, we have infinite choices.  on just one qubit! -->
 
-<section class="slide jsqis-gate" data-machine="#many-qubit-X" data-operations="[[gate.randomize, 34]]">
-  <h2>NOT: many qubits</h2>
-  <div class="slide jsqis-machine remain-fully-visible" data-qubits="4" id="many-qubit-X" data-options="{rescaleStrategy: 'max'}"></div>
-  <div class="slide jsqis-gate" data-machine="#many-qubit-X" data-operations="[[gate.X, 0]]"></div>
-</section>
-
 <section class="slide jsqis-gate" data-machine="#many-qubit-Z" data-operations="[[gate.randomize, 34]]">
-  <h2>Phase: many qubits</h2>
-  <div class="slide jsqis-machine remain-fully-visible" data-qubits="4" id="many-qubit-Z" data-options="{rescaleStrategy: 'max'}"></div>
-  <div class="slide jsqis-gate" data-mahine="#many-qubit-Z" data-operations="[[gate.Z, 0]]"></div>
+  <h2>&ldquo;Phase&rdquo; (many qubits)</h2>
+  <div style="white-space: nowrap">
+    <span id="many-qubit-Z-circuit"></span>
+    <span class="jsqis-machine remain-fully-visible" data-qubits="4" id="many-qubit-Z" data-options="{rescaleStrategy: 'max'}" data-view-options="{scale: 2, amplitudesPerRow: 4}" data-circuit-view-container="#many-qubit-Z-circuit" data-circuit-view-options="{scale: 1.5}"></span>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-Z" data-operations="[[gate.Z, 0]]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-Z" data-operations="[[gate.Z, 1]]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-Z" data-operations="[[gate.Z, 3]]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-Z" data-operations="[[gate.Z, 1]]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-Z" data-operations="[[gate.Z, 2]]"></div>
+  </div>
 </section>
 
-<section class="slide jsqis-gate" data-machine="#many-qubit-CNOT" data-operations="[[gate.randomize, 34]]"">
-  <h2>Controlled-NOT</h2>
-  <div class="slide jsqis-machine remain-fully-visible" data-qubits="4" id="many-qubit-CNOT" data-options="{rescaleStrategy: 'max'}"></div>
-  <div class="slide jsqis-gate" data-mahine="#many-qubit-CNOT" data-operations="[[gate.CNOT, 0, 1]]"></div>
+<section class="slide jsqis-gate" data-machine="#many-qubit-X" data-operations="[[gate.randomize, 34], [gate.Z, 0], [gate.Z, 2], [gate.Z, 3]]">
+  <h2>&ldquo;NOT&rdquo; (many qubits)</h2>
+  <div style="white-space: nowrap">
+    <span id="many-qubit-X-circuit"></span>
+    <span class="jsqis-machine remain-fully-visible" data-qubits="4" id="many-qubit-X" data-options="{rescaleStrategy: 'max'}" data-view-options="{scale: 2, amplitudesPerRow: 4}" data-circuit-view-container="#many-qubit-X-circuit" data-circuit-view-options="{scale: 1.5}"></span>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-X" data-operations="[[gate.X, 1]]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-X" data-operations="[[gate.X, 0]]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-X" data-operations="[[gate.X, 3]]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-X" data-operations="[[gate.X, 2]]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-X" data-operations="[[gate.X, 1]]"></div>
+  </div>
 </section>
 
-<!--
-<section class="slide">
-universal quantum computer from certain gates (show a complete set, c.f. toffoli + CNOT)
+<section class="slide jsqis-gate" data-machine="#many-qubit-CNOT" data-operations="[[gate.randomize, 34]]">
+  <h2>&ldquo;Controlled-NOT&rdquo; operation</h2>
+  <div style="white-space: nowrap">
+    <span id="many-qubit-CNOT-circuit"></span>
+    <span class="jsqis-machine remain-fully-visible" data-qubits="4" id="many-qubit-CNOT" data-options="{rescaleStrategy: 'max'}" data-view-options="{scale: 2, amplitudesPerRow: 4}" data-circuit-view-container="#many-qubit-CNOT-circuit" data-circuit-view-options="{scale: 1.5}"></span>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-CNOT" data-operations="[[gate.CNOT, 2, 0]]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-CNOT" data-operations="[[gate.CNOT, 0, 1]]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-CNOT" data-operations="[[gate.CNOT, 1, 3]]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-CNOT" data-operations="[[gate.CNOT, 2, 1]]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-CNOT" data-operations="[[gate.CNOT, 3, 1]]"></div>
+  </div>
 </section>
--->
+
+<section class="slide" data-machine="#many-qubit-summarized">
+  <h2>Quantum operations: summarized</h2>
+  <div style="white-space: nowrap">
+    <span id="many-qubit-summarized-circuit"></span>
+    <span class="jsqis-machine remain-fully-visible" data-qubits="4" id="many-qubit-summarized" data-options="{rescaleStrategy: 'max'}" data-view-options="{scale: 2, amplitudesPerRow: 4}" data-circuit-view-container="#many-qubit-summarized-circuit" data-circuit-view-options="{scale: 1.5}"></span>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-summarized" data-operations="[[gate.H, 0], [gate.rescale, 'max']]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-summarized" data-operations="[[gate.H, 1], [gate.rescale, 'max']]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-summarized" data-operations="[[gate.H, 2], [gate.rescale, 'max']]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-summarized" data-operations="[[gate.H, 3], [gate.rescale, 'max']]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-summarized" data-operations="[[gate.T, 0], [gate.rescale, 'max']]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-summarized" data-operations="[[gate.H, 0], [gate.rescale, 'max']]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-summarized" data-operations="[[gate.Z, 2]]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-summarized" data-operations="[[gate.CNOT, 1, 2]]"></div>
+    <div class="slide jsqis-gate" data-machine="#many-qubit-summarized" data-operations="[[gate.measure, 111, 0]]"></div>
+  </div>
+  <section class="slide">Key point: Each operation radically changes the mathematical description of the state.</section>
+</section>
 
 <section class="slide">
   <h2>Quantum computing must be reversible</h2>
@@ -367,9 +442,9 @@ universal quantum computer from certain gates (show a complete set, c.f. toffoli
   <ul>
     <li>ion traps</li>
     <li>superconducting qubits</li>
-    <li>spin-defects in diamond and other materials</li>
+    <li>defects in diamond and other materials</li>
     <li>quantum dots</li>
-    <li>toplogical quantum computing</li>
+    <li>topological quantum computing</li>
   </ul>
 </section>
 
@@ -382,7 +457,7 @@ universal quantum computer from certain gates (show a complete set, c.f. toffoli
 <section class="slide">
   <h2>Other concepts</h2>
   <ul>
-    <li class="slide">quantum teleportation</li>
+    <!--<li class="slide">quantum teleportation</li>--> <!-- can only talk about if i mention entanglement before -->
     <li class="slide">quantum cryptography</li>
     <!-- and relate it to no-clone
     so there is a defense if RSA is broken! -->
@@ -415,7 +490,7 @@ universal quantum computer from certain gates (show a complete set, c.f. toffoli
 </section>
 
 <section class="slide">
-  <section>
+  <section style="display: none">
     <h2>Credits</h2>
     <ul>
       <li><a href="https://github.com/garrison/jsqis">jsqis</a> for quantum simulations</li>
@@ -428,7 +503,8 @@ universal quantum computer from certain gates (show a complete set, c.f. toffoli
   <section class="slide">
     <h3>Thanks</h3>
     <ul>
-      <li><a href="http://www.andrewvc.com/">Andrew Cholakian</a> for suggesting that I present this as part of <a href="http://www.meetup.com/Los-Angeles-Hacker-News/">LA Hacker News</a></li>
+      <li>Josie Roman and Future Salon LA for hosting this event today</li>
+      <li><a href="http://www.andrewvc.com/">Andrew Cholakian</a> for originally inspiring me to build this presentation <!--to present at <a href="http://www.meetup.com/Los-Angeles-Hacker-News/">LA Hacker News</a>--></li>
       <li><a href="http://www.kitp.ucsb.edu/mpaf">Matthew Fisher</a>, my academic advisor, for telling me to &ldquo;have fun with it.&rdquo;</li>
       <li>the <a href="http://www.nsf.gov/">National Science Foundation</a> for funding my research</li>
     </ul>
@@ -498,6 +574,7 @@ universal quantum computer from certain gates (show a complete set, c.f. toffoli
 <script>
 $(function() {
     // if speaking-mode remove $(".slide.not-speaking");
+    $('.slide.invisible-if-speaking').remove();
     $.deck('.slide');
 });
 </script>
