@@ -35,6 +35,11 @@
         padding-right: 2em;
     }
 
+    span.PhotonView {
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+
     /* disable reflection shadows in web-2.0.css */
     .cssreflections .deck-container .slide h2 {
         -webkit-box-reflect: none;
@@ -74,8 +79,8 @@
   <h2>Quantum Computing, Explained</h2>
   <div style="margin-top: 5em">
     <h3 style="font-size: 180%">Jim Garrison</h3>
-    <h3 style="font-size: 120%">SATELLITE Santa Monica</h3>
-    <h3 style="font-size: 100%">January 13, 2013</h3>
+    <h3 style="font-size: 120%">Santa Barbara Linux User Group</h3>
+    <h3 style="font-size: 100%">January 31, 2013</h3>
   </div>
   <p class="not-speaking">NOTE: Everything in this presentation is mathematically precise (but we will use colorful diagrams in place of equations).</p>
   <p class="not-speaking">To begin, push the right arrow button on your keyboard.</p>
@@ -216,6 +221,24 @@
   <div class="slide jsqis-gate" data-machine="one-qubit-measurement" data-operations="[[gate.measure, 2453, 0]]"></div>
   <div class="slide jsqis-gate" data-machine="one-qubit-measurement" data-operations="[[gate.rescale]]"></div>
   <section class="slide" style="margin-top: 2em">Given one quantum bit, only one classical bit of information can be extracted.</section>
+</section>
+
+<section class="slide">
+  <h2>Photon polarization as a qubit</h2>
+  <span class="jsqis-machine" data-qubits="1" id="polarization-machine" data-view-options="{scale: 2}" data-photon-view-container="#polarization-machine-photon-view" data-photon-view-options="{scale: 2}"></span>
+  <span class="remain-fully-visible" id="polarization-machine-photon-view"></span>
+  <div class="slide jsqis-gate" data-machine="#polarization-machine" data-operations="[[gate.X, 0]]"></div>
+  <div class="slide jsqis-gate" data-machine="#polarization-machine" data-operations="[[gate.X, 0], [gate.H, 0]]"></div>
+  <div class="slide jsqis-gate" data-machine="#polarization-machine" data-operations="[[gate.Z, 0]]"></div>
+  <div class="slide jsqis-gate" data-machine="#polarization-machine" data-operations="[[gate.T, 0]]"></div>
+  <div class="slide jsqis-gate" data-machine="#polarization-machine" data-operations="[[gate.T, 0]]"></div>
+  <div class="slide jsqis-gate" data-machine="#polarization-machine" data-operations="[[gate.T, 0]]"></div>
+  <div class="slide jsqis-gate" data-machine="#polarization-machine" data-operations="[[gate.T, 0]]"></div>
+  <div class="slide jsqis-gate" data-machine="#polarization-machine" data-operations="[[gate.T, 0]]"></div>
+  <div class="slide jsqis-gate" data-machine="#polarization-machine" data-operations="[[gate.T, 0]]"></div>
+  <div class="slide jsqis-gate" data-machine="#polarization-machine" data-operations="[[gate.randomize, 3]]"></div>
+  <div class="slide jsqis-gate" data-machine="#polarization-machine" data-operations="[[gate.randomize, 15]]"></div>
+  <div class="slide jsqis-gate" data-machine="#polarization-machine" data-operations="[[gate.randomize, 23]]"></div>
 </section>
 
 <section class="slide">
@@ -480,6 +503,7 @@ H gate
   <!-- michael nielsen's blog (?) -->
   <ul>
     <li><h4><a href="http://www.theory.caltech.edu/people/preskill/ph229/#lecture">John Preskill's quantum computation lecture notes</a></h4> available for free (gratis) online</li>
+    <li><h4><a href="http://www.scottaaronson.com/democritus/">Quantum Computing Since Democritus</a></h4> lecture notes by Scott Aaronson, also available online</li>
     <li><h4>An Introduction to Quantum Computing</h4> <span class="not-speaking">(<a href="http://www.amazon.com/gp/product/019857049X/ref=as_li_tf_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=019857049X&linkCode=as2&tag=quantumcomputingexplained-20">Amazon</a> | <a href="http://www.worldcat.org/title/introduction-to-quantum-computing/oclc/85896383">WorldCat</a>)</span> by Phillip Kaye, Raymond Laflamme, and Michele Mosca</li>
     <li><h4>Quantum Computation and Quantum Information</h4> <span class="not-speaking">(<a href="http://www.amazon.com/gp/product/1107002176/ref=as_li_tf_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1107002176&linkCode=as2&tag=quantumcomputingexplained-20">Amazon</a> | <a href="http://www.worldcat.org/title/quantum-computation-and-quantum-information/oclc/43641333">WorldCat</a>)</span> by Michael A. Nielsen and Isaac L. Chuang (a thick, comprehensive book)</li>
   </ul>
@@ -490,20 +514,17 @@ H gate
 </section>
 
 <section class="slide">
-  <section style="display: none">
+  <section style="remain-fully-visible">
     <h2>Credits</h2>
     <ul>
       <li><a href="https://github.com/garrison/jsqis">jsqis</a> for quantum simulations</li>
       <li><a href="http://raphaeljs.com/">Raphaël</a> for 2D vector graphics</li>
       <li><a href="http://imakewebthings.com/deck.js/">deck.js</a> and <a href="https://github.com/mikeharris100/deck.events.js">deck.events.js</a> for presentation-building</li>
-      <li><a href="http://jquery.com/">jQuery</a> and <a href="http://modernizr.com/">Modernizr</a> as a foundation</li>
-      <li>mooz's <a href="https://github.com/mooz/js2-mode">fork of js2-mode</a> for keeping me sane</li>
     </ul>
   </section>
   <section class="slide">
     <h3>Thanks</h3>
     <ul>
-      <li>Josie Roman and Future Salon LA for hosting this event today</li>
       <li><a href="http://www.andrewvc.com/">Andrew Cholakian</a> for originally inspiring me to build this presentation <!--to present at <a href="http://www.meetup.com/Los-Angeles-Hacker-News/">LA Hacker News</a>--></li>
       <li><a href="http://www.kitp.ucsb.edu/mpaf">Matthew Fisher</a>, my academic advisor, for telling me to &ldquo;have fun with it.&rdquo;</li>
       <li>the <a href="http://www.nsf.gov/">National Science Foundation</a> for funding my research</li>
@@ -568,6 +589,7 @@ H gate
 <script src="jsqis/Complex/lib/Complex.js"></script>
 <script src="jsqis/jsqis-core.js"></script>
 <script src="jsqis/jsqis-view.js"></script>
+<script src="jsqis/jsqis-photon-view.js"></script>
 <script src="jsqis/deck.jsqis.js"></script>
 
 <!-- Initialize the deck -->
