@@ -63,6 +63,9 @@
     .not-speaking-mode .speaking {
         display: none;
     }
+    .not-speaking-mode {
+        font-size: 1.5em;
+    }
   </style>
 
   <!-- Transition theme. More available in /themes/transition/ or create your own. -->
@@ -73,7 +76,7 @@
   <!-- Required Modernizr file -->
   <script src="deck.js/modernizr.custom.js"></script>
 </head>
-<body class="deck-container speaking-mode">
+<body class="deck-container">
 
 <section class="slide" style="text-align: center">
   <h2>Quantum Computing, Explained</h2>
@@ -596,8 +599,13 @@ H gate
 <!-- Initialize the deck -->
 <script>
 $(function() {
-    // if speaking-mode remove $(".slide.not-speaking");
-    $('.slide.invisible-if-speaking').remove();
+    if (location.search == "?speaking") {
+        $("body").addClass("speaking-mode");
+        // if speaking-mode remove $(".slide.not-speaking");
+        $('.slide.invisible-if-speaking').remove();
+    } else {
+        $("body").addClass("not-speaking-mode");
+    }
     $.deck('.slide');
 });
 </script>
