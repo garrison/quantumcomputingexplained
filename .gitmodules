@@ -7,3 +7,6 @@
 [submodule "jsqis"]
 	path = jsqis
 	url = https://github.com/garrison/jsqis.git
+[submodule "deck.split.js"]
+	path = deck.split.js
+	url = https://github.com/houqp/deck.split.js.git
